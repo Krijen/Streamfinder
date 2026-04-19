@@ -17,7 +17,7 @@ export default function SearchBar({ onSearch, country, onCountryChange, loading 
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2 mt-3">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-2 mt-3">
       <input
         type="text"
         value={query}
