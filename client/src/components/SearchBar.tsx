@@ -17,7 +17,7 @@ export default function SearchBar({ onSearch, country, onCountryChange, loading 
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-2 mt-3">
+    <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-2 mt-3">
       <input
         type="text"
         value={query}
@@ -26,17 +26,24 @@ export default function SearchBar({ onSearch, country, onCountryChange, loading 
         className="flex-1 bg-gray-800 text-white placeholder-gray-400 rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-indigo-500 border border-gray-700"
       />
       <div className="flex gap-2">
-        <select
-          value={country}
-          onChange={(e) => onCountryChange(e.target.value)}
-          className="flex-1 sm:flex-none bg-gray-800 text-white rounded-lg px-3 py-2.5 outline-none focus:ring-2 focus:ring-indigo-500 border border-gray-700 cursor-pointer"
-        >
-          {COUNTRIES.map((c) => (
-            <option key={c.code} value={c.code}>
-              {c.flag} {c.name}
-            </option>
-          ))}
-        </select>
+        <div className="relative flex-1 md:flex-none flex items-center">
+          <img
+            src={`https://flagcdn.com/w20/${country.toLowerCase()}.png`}
+            alt={country}
+            className="absolute left-3 w-5 pointer-events-none"
+          />
+          <select
+            value={country}
+            onChange={(e) => onCountryChange(e.target.value)}
+            className="w-full md:w-auto bg-gray-800 text-white rounded-lg pl-10 pr-3 py-2.5 outline-none focus:ring-2 focus:ring-indigo-500 border border-gray-700 cursor-pointer appearance-none"
+          >
+            {COUNTRIES.map((c) => (
+              <option key={c.code} value={c.code}>
+                {c.name}
+              </option>
+            ))}
+          </select>
+        </div>
         <button
           type="submit"
           disabled={loading || !query.trim()}
